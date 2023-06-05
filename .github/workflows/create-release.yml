@@ -2,10 +2,6 @@ name: 'Create Release'
 on:
   workflow_call:
     inputs:
-      github-repo:
-        required: true
-        type: string
-        description: 'GitHub repository name'
       environment:
         required: false
         type: string
@@ -150,7 +146,7 @@ jobs:
                   "labels": ["chore"]
                 }
               ],
-              "pr_template": "- #{{TITLE}}: <https://github.com/go-fjords/${{ inputs.github-repo }}/pull/#{{NUMBER}}|##{{NUMBER}}>"
+              "pr_template": "- #{{TITLE}}: <https://github.com/go-fjords/${{ github.event.repository.name }}/pull/#{{NUMBER}}|##{{NUMBER}}>"
             }
       - name: JSON Escape Changelog
         id: json-escaped-changelog
@@ -172,7 +168,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ":sparkles: *${{ inputs.github-repo }}* released <https://github.com/go-fjords/${{ inputs.github-repo }}/releases|${{ inputs.to-tag != '' && inputs.to-tag || steps.date-tag.outputs.tag }}> to *${{ inputs.environment }}*"
+                    "text": ":sparkles: *${{ github.event.repository.name }}* released <https://github.com/go-fjords/${{ github.event.repository.name }}/releases|${{ inputs.to-tag != '' && inputs.to-tag || steps.date-tag.outputs.tag }}> to *${{ inputs.environment }}*"
                     }
                 },
                 {
