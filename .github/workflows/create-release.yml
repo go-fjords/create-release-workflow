@@ -31,7 +31,6 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    needs: deploy-prod
     permissions:
       contents: write
       pull-requests: read
