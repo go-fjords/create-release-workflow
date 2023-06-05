@@ -164,7 +164,7 @@ jobs:
           tag_name: ${{ inputs.to-tag != '' && inputs.to-tag || steps.date-tag.outputs.tag }}
           body: ${{steps.github-release.outputs.changelog}}
       - name: Notify Slack regarding successful deploy
-        uses: slackapi/slack-github-action@ebd044f149bf27a2817c0eee26e98d797fa5cffd # ratchet:slackapi/slack-github-action@v1.22.0
+        uses: slackapi/slack-github-action@e28cf165c92ffef168d23c5c9000cffc8a25e117 # ratchet:slackapi/slack-github-action@v1.24.0
         with:
           payload: |
             {
