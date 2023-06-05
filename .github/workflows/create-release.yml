@@ -161,7 +161,7 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.date-tag.outputs.tag }}
+          tag_name: ${{ inputs.to-tag != '' && inputs.to-tag || steps.date-tag.outputs.tag }}
           body: ${{steps.github-release.outputs.changelog}}
       - name: Notify Slack regarding successful deploy
         uses: slackapi/slack-github-action@ebd044f149bf27a2817c0eee26e98d797fa5cffd # ratchet:slackapi/slack-github-action@v1.22.0
@@ -172,7 +172,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ":sparkles: *${{ inputs.github-repo }}* released <https://github.com/go-fjords/${{ inputs.github-repo }}/releases|${{ steps.date-tag.outputs.tag }}> to *${{ inputs.environment }}*"
+                    "text": ":sparkles: *${{ inputs.github-repo }}* released <https://github.com/go-fjords/${{ inputs.github-repo }}/releases|${{ inputs.to-tag != '' && inputs.to-tag || steps.date-tag.outputs.tag }}> to *${{ inputs.environment }}*"
                     }
                 },
                 {
