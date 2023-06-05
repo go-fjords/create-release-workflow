@@ -46,7 +46,7 @@ jobs:
           tag: ${{ inputs.to-tag != '' && inputs.to-tag || steps.date-tag.outputs.tag }}
       - name: Build Changelog
         id: github-release
-        uses: mikepenz/release-changelog-builder-action@v3
+        uses: mikepenz/release-changelog-builder-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.github-token }}
         with:
@@ -100,7 +100,7 @@ jobs:
             }
       - name: Build Changelog Slack
         id: github-release-slack
-        uses: mikepenz/release-changelog-builder-action@v3
+        uses: mikepenz/release-changelog-builder-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.github-token }}
         with:
