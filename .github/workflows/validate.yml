@@ -1,0 +1,20 @@
+name: Pull Request
+concurrency:
+  group: pr_${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+
+jobs:
+  validate:
+    permissions:
+      contents: read
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v1
+      - run: bun install -g @action-validator/core @action-validator/cli
+      - name: Validate
+        run: action-validator .github/workflows/create-release.yml .github/workflows/release.yml
