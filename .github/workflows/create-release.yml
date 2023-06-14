@@ -106,43 +106,43 @@ jobs:
             {
               "categories": [
                 {
-                  "title": "## 🚀 Features",
+                  "title": "*🚀 Features*",
                   "labels": ["feature"]
                 },
                 {
-                  "title": "## 🐞 Fixes",
+                  "title": "*🐞 Fixes*",
                   "labels": ["fix"]
                 },
                 {
-                  "title": "## 🧪 Tests",
+                  "title": "*🧪 Tests*",
                   "labels": ["test"]
                 },
                 {
-                  "title": "## 📚 Docs",
+                  "title": "*📚 Docs*",
                   "labels": ["docs"]
                 },
                 {
-                  "title": "## 🎨 Style",
+                  "title": "*🎨 Style*",
                   "labels": ["style"]
                 },
                 {
-                  "title": "## 🔀 Refactor",
+                  "title": "*🔀 Refactor*",
                   "labels": ["refactor"]
                 },
                 {
-                  "title": "## ⚡️ Performance",
+                  "title": "*⚡️ Performance*",
                   "labels": ["performance"]
                 },
                 {
-                  "title": "## 🔧 Build",
+                  "title": "*🔧 Build*",
                   "labels": ["build"]
                 },
                 {
-                  "title": "## 🔄 CI",
+                  "title": "*🔄 CI*",
                   "labels": ["ci"]
                 },
                 {
-                  "title": "## 🧹 Chore",
+                  "title": "*🧹 Chore*",
                   "labels": ["chore"]
                 }
               ],
@@ -169,7 +169,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ${{ toJSON(steps.github-release.outputs.changelog) }}
+                    "text": ${{ toJSON(steps.github-release-slack.outputs.changelog) }}
                   }
                 }]
             }
