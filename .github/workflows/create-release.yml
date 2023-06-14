@@ -152,7 +152,7 @@ jobs:
         id: json-escaped-changelog
         run: |
           echo 'changelog<<xEOFx' >> $GITHUB_OUTPUT
-          echo '${{ steps.github-release-slack.outputs.changelog }}' | jq -Rsa . >> $GITHUB_OUTPUT
+          echo '${{ steps.github-release-slack.outputs.changelog }}' | sed "s/'/\"/g" | jq -Rsa . >> $GITHUB_OUTPUT
           echo 'xEOFx' >> $GITHUB_OUTPUT
       - name: Create Release
         uses: softprops/action-gh-release@v1
