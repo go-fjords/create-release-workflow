@@ -148,24 +148,11 @@ jobs:
               ],
               "pr_template": "- #{{TITLE}}: <https://github.com/go-fjords/${{ github.event.repository.name }}/pull/#{{NUMBER}}|##{{NUMBER}}>"
             }
-      - name: Escape single quotes
-        uses: frabert/replace-string-action@v2
-        id: escape-single-quotes
-        with:
-          string: ${{ steps.github-release-slack.outputs.changelog }}
-          pattern: "'"
-          replace-with: '`'
-      - name: JSON Escape Changelog
-        id: json-escaped-changelog
-        run: |
-          echo 'changelog<<xEOFx' >> $GITHUB_OUTPUT
-          echo '${{ steps.escape-single-quotes.outputs.replaced }}' | jq -Rsa . >> $GITHUB_OUTPUT
-          echo 'xEOFx' >> $GITHUB_OUTPUT
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ inputs.to-tag != '' && inputs.to-tag || steps.date-tag.outputs.tag }}
-          body: ${{steps.github-release.outputs.changelog}}
+          body: ${{ steps.github-release.outputs.changelog }}
       - name: Notify Slack regarding successful deploy
         uses: slackapi/slack-github-action@e28cf165c92ffef168d23c5c9000cffc8a25e117 # ratchet:slackapi/slack-github-action@v1.24.0
         with:
@@ -182,7 +169,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ${{ steps.json-escaped-changelog.outputs.changelog }}
+                    "text": ${{ toJSON(steps.github-release.outputs.changelog) }}
                   }
                 }]
             }
