@@ -1,0 +1,13 @@
+name: Release
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  release:
+    name: Release
+    uses: go-fjords/create-release-workflow/.github/workflows/create-release.yml@v1
+    secrets:
+      slack-webhook-url: ${{ secrets.SLACK_GITHUB_DEPLOYS_PROD_WEBHOOK }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}
