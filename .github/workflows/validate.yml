@@ -17,4 +17,6 @@ jobs:
       - uses: oven-sh/setup-bun@v1
       - run: bun install -g @action-validator/core @action-validator/cli
       - name: Validate
-        run: action-validator .github/workflows/create-release.yml .github/workflows/release.yml
+        run: |
+          action-validator .github/workflows/create-release.yml
+          action-validator .github/workflows/release.yml
